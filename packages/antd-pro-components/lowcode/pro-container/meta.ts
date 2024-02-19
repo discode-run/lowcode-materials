@@ -10,7 +10,7 @@ const ProContainerMeta: ComponentMetadata = {
   group: '高级组件',
   category: '布局类',
   npm: {
-    package: '@seada/antd-materials',
+    package: '@appthen/antd-pro',
     version: 'latest',
     exportName: 'ProContainer',
     main: '',
@@ -206,31 +206,6 @@ const ProContainerMeta: ComponentMetadata = {
                     },
                     initialValue: []
                   }
-                },
-                {
-                  name: 'avatar',
-                  title: { label: '头像', tip: '标题栏旁的头像' },
-                  propType: 'object',
-                  supportVariable: false,
-                  setter: [
-                    {
-                      componentName: 'ObjectSetter',
-                      props: {
-                        config: {
-                          items: [
-                            {
-                              name: 'src',
-                              title: { label: '地址', tip: '头像地址' },
-                              setter: {
-                                componentName: 'StringSetter'
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    'JsonSetter'
-                  ]
                 },
                 {
                   name: 'breadcrumb',
@@ -699,7 +674,9 @@ const ProContainerMeta: ComponentMetadata = {
             type: 'i18n',
             'en-US': 'ghost',
             'zh-CN': 'ghost'
-          }
+          },
+          tip: '配置头部区域的背景颜色为透明'
+
         },
         name: 'ghost',
         setter: {

@@ -10,7 +10,7 @@ const ProTableMeta = {
   group: '高级组件',
   category: '表格类',
   npm: {
-    package: '@seada/antd-materials',
+    package: '@appthen/antd-pro',
     version: 'latest',
     exportName: 'ProTable',
     main: '',
@@ -1357,16 +1357,16 @@ const ProTableMeta = {
             title: { label: '搜索', tip: 'search | 搜索' },
             propType: 'bool',
             setter: 'BoolSetter',
-            defaultValue: true,
-            extraProps: {
-              setValue: (target, value) => {
-                if (value) {
-                  target.parent.setPropValue('search', {
-                    defaultCollapsed: true
-                  })
-                }
-              }
-            }
+            defaultValue: false,
+            // extraProps: {
+            //   setValue: (target, value) => {
+            //     if (value) {
+            //       target.parent.setPropValue('search', {
+            //         defaultCollapsed: true
+            //       })
+            //     }
+            //   }
+            // }
           },
           {
             title: {

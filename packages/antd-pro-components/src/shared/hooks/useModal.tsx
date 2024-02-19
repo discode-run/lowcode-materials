@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Space, Button } from 'antd'
-import { uuid } from '../'
+import { uuid } from '..'
 
 const { useState, useImperativeHandle } = React
 

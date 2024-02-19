@@ -1,9 +1,0 @@
-{
-  "library": "DisscodeAntdPro",
-  "libraryTarget": "umd",
-  "sourceMap": false,
-  "alias": {
-    "@": "./src/components"
-  },
-  "plugins": [["build-plugin-component-multiple"]]
-}

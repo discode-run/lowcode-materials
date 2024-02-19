@@ -3,13 +3,15 @@ import { IPublicTypeComponentMetadata, IPublicTypeSnippet } from '@alilc/lowcode
 
 const ProSkeletonMeta: IPublicTypeComponentMetadata = {
   "componentName": "ProSkeleton",
-  "title": "ProSkeleton",
+  "title": "骨架屏",
   "docUrl": "",
   "screenshot": "",
   "devMode": "proCode",
+  group: '高级组件',
+  category: '布局类',
   "npm": {
-    "package": "antd-pro-components",
-    "version": "0.1.0",
+    "package": "@appthen/antd-pro",
+    "version": "1.0.0-rc.32",
     "exportName": "ProSkeleton",
     "main": "src/index.tsx",
     "destructuring": true,
@@ -21,8 +23,39 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
         "title": {
           "label": {
             "type": "i18n",
+            "en-US": "type",
+            "zh-CN": "类型"
+          }
+        },
+        "name": "type",
+        "setter": {
+          "componentName": "RadioGroupSetter",
+          "props": {
+            options: [
+              {
+                "label": "列表",
+                "value": "list"
+              },
+              {
+                "label": "详细",
+                "value": "descriptions"
+              },
+              {
+                "label": "结果",
+                "value": "result"
+              }
+            ]
+            
+          },
+          "initialValue": "list"
+        }
+      },
+      {
+        "title": {
+          "label": {
+            "type": "i18n",
             "en-US": "active",
-            "zh-CN": "active"
+            "zh-CN": "激活"
           }
         },
         "name": "active",
@@ -37,27 +70,12 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
           "label": {
             "type": "i18n",
             "en-US": "pageHeader",
-            "zh-CN": "pageHeader"
+            "zh-CN": "页面头显示"
           }
         },
         "name": "pageHeader",
         "setter": {
-          "componentName": "RadioGroupSetter",
-          "props": {
-            "dataSource": [
-              {
-                "label": "false",
-                "value": false
-              }
-            ],
-            "options": [
-              {
-                "label": "false",
-                "value": false
-              }
-            ]
-          },
-          "initialValue": false
+          "componentName": "BoolSetter",
         }
       },
       {
@@ -65,7 +83,7 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
           "label": {
             "type": "i18n",
             "en-US": "statistic",
-            "zh-CN": "statistic"
+            "zh-CN": "骨架屏数量"
           }
         },
         "name": "statistic",
@@ -79,21 +97,7 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
                 "initialValue": 0
               },
               {
-                "componentName": "RadioGroupSetter",
-                "props": {
-                  "dataSource": [
-                    {
-                      "label": "false",
-                      "value": false
-                    }
-                  ],
-                  "options": [
-                    {
-                      "label": "false",
-                      "value": false
-                    }
-                  ]
-                },
+                "componentName": "BoolSetter",
                 "initialValue": false
               }
             ]
@@ -112,18 +116,7 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
         "setter": {
           "componentName": "RadioGroupSetter",
           "props": {
-            "dataSource": [
-              {
-                "label": "false",
-                "value": false
-              }
-            ],
-            "options": [
-              {
-                "label": "false",
-                "value": false
-              }
-            ]
+            
           },
           "initialValue": false
         }
@@ -140,18 +133,7 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
         "setter": {
           "componentName": "RadioGroupSetter",
           "props": {
-            "dataSource": [
-              {
-                "label": "false",
-                "value": false
-              }
-            ],
-            "options": [
-              {
-                "label": "false",
-                "value": false
-              }
-            ]
+            
           },
           "initialValue": false
         }
@@ -161,7 +143,7 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
           "label": {
             "type": "i18n",
             "en-US": "list",
-            "zh-CN": "list"
+            "zh-CN": "列表骨架屏"
           }
         },
         "name": "list",
@@ -175,71 +157,13 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
                 "initialValue": 0
               },
               {
-                "componentName": "RadioGroupSetter",
-                "props": {
-                  "dataSource": [
-                    {
-                      "label": "false",
-                      "value": false
-                    }
-                  ],
-                  "options": [
-                    {
-                      "label": "false",
-                      "value": false
-                    }
-                  ]
-                },
-                "initialValue": false
+                "componentName": "BoolSetter",
               }
             ]
           }
         }
       },
-      {
-        "title": {
-          "label": {
-            "type": "i18n",
-            "en-US": "type",
-            "zh-CN": "type"
-          }
-        },
-        "name": "type",
-        "setter": {
-          "componentName": "RadioGroupSetter",
-          "props": {
-            "dataSource": [
-              {
-                "label": "list",
-                "value": "list"
-              },
-              {
-                "label": "descriptions",
-                "value": "descriptions"
-              },
-              {
-                "label": "result",
-                "value": "result"
-              }
-            ],
-            "options": [
-              {
-                "label": "list",
-                "value": "list"
-              },
-              {
-                "label": "descriptions",
-                "value": "descriptions"
-              },
-              {
-                "label": "result",
-                "value": "result"
-              }
-            ]
-          },
-          "initialValue": "list"
-        }
-      }
+
     ],
     "supports": {
       "style": true
@@ -249,8 +173,8 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
 };
 const snippets: IPublicTypeSnippet[] = [
   {
-    "title": "ProSkeleton",
-    "screenshot": "",
+    "title": "骨架屏",
+    "screenshot": "https://alifd.alicdn.com/fusion-cool/icons/icon-antd/skeleton-1.png",
     "schema": {
       "componentName": "ProSkeleton",
       "props": {}

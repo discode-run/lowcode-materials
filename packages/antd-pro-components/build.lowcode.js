@@ -1,15 +1,22 @@
-const { library } = require('./build.json');
-
 module.exports = {
   alias: {
-    '@': './src',
+    '@': './src'
   },
   plugins: [
     [
       '@alifd/build-plugin-lowcode',
       {
-        library,
-        engineScope: "@alilc",
+        engineScope: '@alilc',
+        staticResources: {
+          engineCoreCssUrl:
+            'https://alifd.alicdn.com/npm/@alilc/lowcode-engine@1.2.1/dist/css/engine-core.css',
+          engineExtCssUrl:
+            'https://alifd.alicdn.com/npm/@alilc/lowcode-engine-ext@1.0.6/dist/css/engine-ext.css',
+          engineCoreJsUrl:
+            'https://alifd.alicdn.com/npm/@alilc/lowcode-engine@1.2.1/dist/js/engine-core.js',
+          engineExtJsUrl:
+            'https://alifd.alicdn.com/npm/@alilc/lowcode-engine-ext@1.0.6/dist/js/engine-ext.js',
+        },
         builtinAssets: [
           {
             packages: [
@@ -40,45 +47,46 @@ module.exports = {
                 ],
                 library: 'icons'
               },
-              
-              // {
-              //   package: 'antd',
-              //   version: '5.9.0',
-              //   urls: [
-              //     // `//g.alicdn.com/code/lib/antd/4.23.0/antd.min.js`,
-              //     // `//g.alicdn.com/code/lib/antd/4.23.0/antd.min.css`
-              //     `https://cdn.bootcdn.net/ajax/libs/antd/5.9.0/antd.min.js`,
-              //     `https://cdn.bootcdn.net/ajax/libs/antd/5.9.0/reset.min.css`,
-              //                   ],
-              //   library: 'antd'
-              // },
-              // {
-              //   package: '@discode/antd',
-              //   version: '0.05',
-              //   library: 'DiscodeAntd',
-              //   urls: [
-              //     'https://cdn.disscode.com/material/118158/@discode/antd/0.0.5/view.js',
-              //     'https://cdn.disscode.com/material/118158/@discode/antd/0.0.5/view.css'
-              //   ],
-              //   editUrls: [
-              //     'https://cdn.disscode.com/material/118158/@discode/antd/0.0.5/view.js',
-              //     'https://cdn.disscode.com/material/118158/@discode/antd/0.0.5/view.css'
-              //   ]
-              // }
+              {
+                package: 'antd',
+                version: '5.9.0',
+                urls: [
+                  '//cdn.bootcdn.net/ajax/libs/dayjs/1.11.9/dayjs.min.js',
+                  `//cdn.bootcdn.net/ajax/libs/antd/5.9.0/antd.js`,
+                  `//cdn.bootcdn.net/ajax/libs/antd/5.9.0/reset.css`,
+                ],
+                library: 'antd',
+              },
+              {
+                package: '@appthen/antd',
+                version: '1.0.2',
+                library: 'AppthenAntd',
+                urls: [
+                  
+                //   'https://cdn.scredit.sg/th/seada/live/antd-lowcode-materials@1.0.7/lowcode/view.js',
+                //   'https://cdn.scredit.sg/th/seada/live/antd-lowcode-materials@1.0.7/lowcode/view.css'
+                `https://cdn.disscode.com/material/117987/@appthen/antd/1.0.2/view.js`,
+`https://cdn.disscode.com/material/117987/@appthen/antd/1.0.2/view.css`
+                ],
+                editUrls: [
+                  `https://cdn.disscode.com/material/117987/@appthen/antd/1.0.2/view.js`,
+                  `https://cdn.disscode.com/material/117987/@appthen/antd/1.0.2/view.css`
+                ]
+              }
             ],
             components: [
-              // {
-              //   exportName: 'DiscodeAntdMeta',
-              //   npm: {
-              //     package: '@discode/antd',
-              //     version: '0.0.5'
-              //   },
-              //   url: 'https://cdn.disscode.com/material/118158/@discode/antd/0.0.5/meta.js',
-              //   urls: {
-              //     default:
-              //       'https://cdn.disscode.com/material/118158/@discode/antd/0.0.5/meta.js'
-              //   }
-              // }
+              {
+                exportName: 'AppthenAntdMeta',
+                npm: {
+                  package: '@appthen/antd',
+                  version: '1.0.2'
+                },
+                url:`https://cdn.disscode.com/material/117987/@appthen/antd/1.0.2/meta.js`,
+                urls: {
+                  default:
+                    'https://cdn.disscode.com/material/117987/@appthen/antd/1.0.2/meta.js'
+                }
+              }
             ],
             sort: {
               groupList: ['精选组件', '原子组件'],
@@ -97,8 +105,8 @@ module.exports = {
             ignoreComponents: {}
           }
         ]
-      },
+      }
     ],
-  ],
-
-};
+    './build.plugin.js'
+  ]
+}

@@ -1,16 +1,9 @@
 {
-  "library": "BizComps",
+  "library": "AppthenAntdPro",
   "libraryTarget": "umd",
-  "sourceMap": true,
+  "sourceMap": false,
   "alias": {
     "@": "./src/components"
   },
-  "plugins": [
-    [
-      "build-plugin-component",
-      {
-        "themePackage": "@alifd/theme-2"
-      }
-    ]
-  ]
+  "plugins": [["build-plugin-component-multiple"]]
 }
