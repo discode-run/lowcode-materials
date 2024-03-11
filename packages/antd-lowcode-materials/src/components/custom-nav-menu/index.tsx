@@ -10,8 +10,13 @@ import * as icons from '@ant-design/icons';
 const customNav: any = (props: any, ref: Ref<any>) => {
   const {icon,type,...otherProps} = props
 
-  const data = otherProps?.items ||[]
 
+  
+  let data = otherProps?.items ||[]
+  if (!Array.isArray(data)) {
+    data = []
+    // 是数组
+  }
   function processMenuItems(menuItems) {
     return menuItems?.map((item:any) => {
 
