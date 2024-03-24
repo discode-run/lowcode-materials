@@ -1,7 +1,7 @@
 {
   "name": "lowcode-materials",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Materials for LowCode",
   "scripts": {
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
