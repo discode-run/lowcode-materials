@@ -8,10 +8,15 @@ const ProSkeletonMeta: IPublicTypeComponentMetadata = {
   "screenshot": "",
   "devMode": "proCode",
   "npm": {
+<<<<<<< HEAD:packages/_antd-pro-components/lowcode/pro-skeleton/meta.ts
     "package": "antd-pro-components",
     "version": "0.1.0",
+=======
+    "package": "@appthen/antd-pro",
+    "version": "1.0.0-rc.32",
+>>>>>>> 20240305:packages/antd-pro/packages/antd-materials/lowcode/pro-skeleton/meta.ts
     "exportName": "ProSkeleton",
-    "main": "src/index.tsx",
+    "main": "",
     "destructuring": true,
     "subName": ""
   },

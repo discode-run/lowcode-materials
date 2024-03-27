@@ -5,37 +5,31 @@ const snippets = [
     "title": "高级菜单",
     screenshot: 'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/menu-1.jpg',
     "schema": {
-      "componentName": "customNav",
+      "componentName": "CustomNav",
       "props": {
-        items: [
-          {
-            key: '1',
-            label: '菜单项1',
-            children: [
-              {
-                key: '1-1',
-                label: '子菜单项1',
-              },
-              {
-                key: '1-2',
-                label: '子菜单项2',
-              },
-            ],
-          },
-          {
-            key: '2',
-            label: '菜单项2',
-          },
-        ],
+        items: [{
+          "key": "1",
+          "label": "菜单项1",
+          "icon": "BarsOutlined",
+          "children": [{
+              "key": "1-1",
+              "label": "子菜单项1",
+              "icon": "AccountBookOutlined"
+          }, {
+              "key": "1-2",
+              "label": "子菜单项2",
+              "icon": "CalculatorOutlined"
+          }]
+      }, {
+          "key": "2",
+          "label": "菜单项2",
+          "icon": "BulbOutlined"
+      }],
         triggerSubMenuAction: 'click',
         mode: "inline",
         theme: "light",
         "icon.style":{width:"20px"},
         "icon.name": "icon-tuichu",
-        "icon.url": [
-          '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overridden)
-          '//at.alicdn.com/t/font_1788592_a5xf2bdic3u.js', // icon-shoppingcart, icon-python
-        ]
       }
     }
   }
@@ -44,7 +38,7 @@ const snippets = [
 
 export default {
   snippets,
-  "componentName": "customNav",
+  "componentName": "CustomNav",
   "title": "高级菜单",
   "docUrl": "",
   screenshot: 'https://alifd.alicdn.com/fusion-cool/icons/icon-antd/menu-1.jpg',
@@ -248,73 +242,45 @@ export default {
       title: { label: '折叠图标', tip: '自定义 Menu 折叠时的图标' },
       propType: 'node',
     },
+    // {
+    //   name: 'svg',
+    //   title: { label: 'svg启用', tip: 'icon使用svg,icon配置失效' },
+    //   propType: 'node',
+    // },
+
     {
-      name: 'svg',
-      title: { label: 'svg启用', tip: 'icon使用svg,icon配置失效' },
-      propType: 'node',
+      name: 'icon.rotate',
+      title: {
+        label: '旋转角度',
+        tip: '图标旋转角度',
+      },
+      propType: 'number',
     },
     {
-      title: 'icon配置',
-      display: 'block',
+      name: 'icon.spin',
+      title: { label: '旋转动画', tip: '是否有旋转动画' },
+      propType: 'bool',
+    },
+    {
+      name: 'icon.style',
+      title: '图标样式',
       type: 'group',
+      extraProps: {
+        display: 'entry',
+      },
       items: [
-        // {
-        //   name: 'icon.name',
-        //   title: { label: 'icon标签', tip: '自定义图标,iconfont.cn' },
-        //   setter: {
-        //     componentName: 'StringSetter',
-        //   },
-        // },
-        // {
-        //   name: 'icon',
-        //   title: { label: 'icon地址', tip: '自定义 icon地址,iconfont.cn' },
-        //   setter: {
-        //     componentName: 'ObjectSetter',
-        //     props: {
-        //       config: {
-        //         items: [
-        //           {
-        //             name: 'url',
-        //             title: { label: '地址', tip: '地址' },
-        //             setter: {
-        //               componentName: 'ArraySetter',
-        //               props: {
-        //                 itemSetter: {
-        //                   componentName: 'StringSetter',
-        //                 }
-        //               }
-        //             },
-        //           },
-        //         ],
-        //       },
-        //     },
-        //   },
-        // },
-
-
-
         {
           name: 'icon.style',
-          title: 'icon样式',
-          type: 'group',
-          extraProps: {
-            display: 'entry',
+          title: {
+            label: '图标样式',
+            tip: 'icon.style | 用于设置 Drawer 头部的样式',
           },
-          items: [
-            {
-              name: 'icon.style',
-              title: {
-                label: '样式设置',
-                tip: '自定义 icon样式',
-              },
-              setter: 'StyleSetter',
-              extraProps: {
-                display: 'block',
-              },
-            },
-          ],
+          setter: 'StyleSetter',
+          extraProps: {
+            display: 'block',
+          },
         },
-      ]
+      ],
     },
 
   ],
@@ -325,21 +291,29 @@ export default {
       events: [
         {
           name: 'onClick',
+          description:"点击 MenuItem 调用此函数",
+
           template:
             "onClick({item,key,keyPath,domEvent},${extParams}){\n// 点击 MenuItem 调用此函数\nconsole.log('onClick',item,key,keyPath,domEvent);}",
         },
         {
           name: 'onDeselect',
+          description:"取消选中时调用",
+
           template:
             "onDeselect({item,key,keyPath,selectedKeys,domEvent},${extParams}){\n// 取消选中时调用，仅在 multiple 生效\nconsole.log('onDeselect',item,key,keyPath,selectedKeys,domEvent);}",
         },
         {
           name: 'onOpenChange',
+          description:"展开/关闭的回调",
+
           template:
             "onOpenChange(openKeys,${extParams}){\n// SubMenu 展开/关闭的回调\nconsole.log('onOpenChange',openKeys);}",
         },
         {
           name: 'onSelect',
+          description:"被选中时调用",
+
           template:
             "onSelect({item,key,keyPath,selectedKeys,domEvent},${extParams}){\n// 被选中时调用\nconsole.log('onSelect',item,key,keyPath,selectedKeys,domEvent);}",
         },

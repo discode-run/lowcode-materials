@@ -33,7 +33,11 @@ export default {
     }
   ],
   npm: {
+<<<<<<< HEAD:packages/_antd-pro-components/lowcode/pro-popconfirm/meta.ts
     package: '@seada/antd-materials',
+=======
+    package: '@appthen/antd-pro',
+>>>>>>> 20240305:packages/antd-pro/packages/antd-materials/lowcode/pro-popconfirm/meta.ts
     version: 'latest',
     exportName: 'ProPopconfirm',
     main: '',

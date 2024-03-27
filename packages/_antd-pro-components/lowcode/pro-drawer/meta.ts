@@ -11,7 +11,11 @@ export default {
   group: '高级组件',
   category: '弹窗类',
   npm: {
+<<<<<<< HEAD:packages/_antd-pro-components/lowcode/pro-drawer/meta.ts
     package: '@seada/antd-materials',
+=======
+    package: '@appthen/antd-pro',
+>>>>>>> 20240305:packages/antd-pro/packages/antd-materials/lowcode/pro-drawer/meta.ts
     version: 'latest',
     exportName: 'ProDrawer',
     main: '',

@@ -10,7 +10,11 @@ const ProTableMeta = {
   group: '高级组件',
   category: '表格类',
   npm: {
+<<<<<<< HEAD:packages/_antd-pro-components/lowcode/pro-table/meta.ts
     package: '@seada/antd-materials',
+=======
+    package: '@appthen/antd-pro',
+>>>>>>> 20240305:packages/antd-pro/packages/antd-materials/lowcode/pro-table/meta.ts
     version: 'latest',
     exportName: 'ProTable',
     main: '',
@@ -646,219 +650,218 @@ const ProTableMeta = {
       },
       {
         title: '分页',
-        display: 'block',
-        type: 'group',
-        items: [
+        name: 'pagination',
+        supportVariable: true,
+        defaultValue: true,
+        setter: [
+          "BoolSetter",
           {
-            name: 'pagination',
-            title: { label: '显示分页', tip: 'pagination | 显示分页' },
-            propType: 'bool',
-            setter: 'BoolSetter',
-            extraProps: {
-              setValue: (target, value) => {
-                if (value) {
-                  target.parent.setPropValue('pagination', {
-                    defaultPageSize: 10
-                  })
-                }
-              }
-            }
-          },
-          {
-            name: 'pagination.defaultPageSize',
-            title: {
-              label: '默认每页条数',
-              tip: 'pagination.defaultPageSize | 默认每页条数'
-            },
-            propType: 'number',
-            setter: 'NumberSetter',
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("pagination")'
-            }
-          },
-          {
-            name: 'pagination.pageSize',
-            title: { label: '每页条数', tip: 'pagination.pageSize | 每页条数' },
-            propType: 'number',
-            setter: 'NumberSetter',
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("pagination")'
-            },
-            supportVariable: true
-          },
-          // {
-          //   name: 'pagination.total',
-          //   title: { label: '数据总数', tip: 'pagination.total | 数据总数' },
-          //   propType: 'number',
-          //   setter: 'NumberSetter',
-          //   condition: {
-          //     type: 'JSFunction',
-          //     value: 'target => !!target.getProps().getPropValue("pagination")'
-          //   }
-          // },
-          {
-            name: 'pagination.defaultCurrent',
-            title: {
-              label: '默认当前页',
-              tip: 'pagination.defaultCurrent | 默认的当前页数'
-            },
-            propType: 'number',
-            setter: 'NumberSetter',
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("pagination")'
-            }
-          },
-          // {
-          //   name: 'pagination.current',
-          //   title: { label: '当前页数', tip: 'pagination.current | 当前页数' },
-          //   propType: 'number',
-          //   setter: 'NumberSetter',
-          //   condition: {
-          //     type: 'JSFunction',
-          //     value: 'target => !!target.getProps().getPropValue("pagination")'
-          //   }
-          // },
-          // {
-          //   name: 'pagination.showTotal',
-          //   title: {
-          //     label: '显示总数',
-          //     tip: 'pagination.showTotal | 用于显示数据总量和当前数据顺序'
-          //   },
-          //   propType: 'func',
-          //   setter: [
-          //     {
-          //       componentName: 'FunctionSetter',
-          //       props: {
-          //         template:
-          //           'showTotal(total,range,${extParams}){\n// 用于格式化显示表格数据总量\nreturn `共 ${total} 条`;\n}'
-          //       }
-          //     },
-          //     'VariableSetter'
-          //   ],
-          //   condition: {
-          //     type: 'JSFunction',
-          //     value: 'target => !!target.getProps().getPropValue("pagination")'
-          //   }
-          // },
-          {
-            name: 'pagination.showSizeChanger',
-            title: {
-              label: '页数切换',
-              tip: 'pagination.showSizeChanger | 是否展示 pageSize 切换器'
-            },
-            propType: 'bool',
-            setter: 'BoolSetter',
-            defaultValue: false,
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("pagination")'
-            }
-          },
-          {
-            name: 'pagination.showQuickJumper',
-            title: {
-              label: '快速跳转',
-              tip: 'pagination.showQuickJumper | 是否可以快速跳转至某页'
-            },
-            propType: 'bool',
-            setter: 'BoolSetter',
-            defaultValue: false,
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("pagination")'
-            }
-          },
-          {
-            name: 'pagination.simple',
-            title: { label: '简单分页', tip: 'pagination.simple | 简单分页' },
-            propType: 'bool',
-            setter: 'BoolSetter',
-            defaultValue: false,
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("pagination")'
-            }
-          },
-          {
-            name: 'pagination.size',
-            title: { label: '分页尺寸', tip: 'pagination.size | 分页尺寸' },
-            propType: {
-              type: 'oneOf',
-              value: ['default', 'small']
-            },
-            setter: [
-              {
-                componentName: 'RadioGroupSetter',
-                props: {
-                  options: [
-                    {
-                      title: '默认',
-                      value: 'default'
+            componentName: 'ObjectSetter',
+            props: {
+              config: {
+                items: [
+
+                  {
+                    name: 'defaultPageSize',
+                    title: {
+                      label: '默认每页条数',
+                      tip: 'defaultPageSize | 默认每页条数'
                     },
-                    {
-                      title: '小',
-                      value: 'small'
+                    propType: 'number',
+                    setter: 'NumberSetter',
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("pagination")'
                     }
-                  ]
-                }
-              },
-              'VariableSetter'
-            ],
-            defaultValue: 'default',
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("pagination")'
-            }
-          },
-          {
-            name: 'pagination.position',
-            title: { label: '分页位置', tip: 'pagination.position | 分页位置' },
-            setter: {
-              componentName: 'ArraySetter',
-              props: {
-                itemSetter: {
-                  componentName: 'SelectSetter',
-                  props: {
-                    options: [
-                      {
-                        title: '上左',
-                        value: 'topLeft'
-                      },
-                      {
-                        title: '上中',
-                        value: 'topCenter'
-                      },
-                      {
-                        title: '上右',
-                        value: 'topRight'
-                      },
-                      {
-                        title: '下左',
-                        value: 'bottomLeft'
-                      },
-                      {
-                        title: '下中',
-                        value: 'bottomCenter'
-                      },
-                      {
-                        title: '下右',
-                        value: 'bottomRight'
-                      }
-                    ]
                   },
-                  initialValue: 'bottomRight'
-                }
+                  {
+                    name: 'pageSize',
+                    title: { label: '每页条数', tip: 'pagination.pageSize | 每页条数' },
+                    propType: 'number',
+                    setter: 'NumberSetter',
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("pagination")'
+                    },
+                    supportVariable: true
+                  },
+                  // {
+                  //   name: 'pagination.total',
+                  //   title: { label: '数据总数', tip: 'pagination.total | 数据总数' },
+                  //   propType: 'number',
+                  //   setter: 'NumberSetter',
+                  //   condition: {
+                  //     type: 'JSFunction',
+                  //     value: 'target => !!target.getProps().getPropValue("pagination")'
+                  //   }
+                  // },
+                  {
+                    name: 'defaultCurrent',
+                    title: {
+                      label: '默认当前页',
+                      tip: 'defaultCurrent | 默认的当前页数'
+                    },
+                    propType: 'number',
+                    setter: 'NumberSetter',
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("pagination")'
+                    }
+                  },
+                  // {
+                  //   name: 'pagination.current',
+                  //   title: { label: '当前页数', tip: 'pagination.current | 当前页数' },
+                  //   propType: 'number',
+                  //   setter: 'NumberSetter',
+                  //   condition: {
+                  //     type: 'JSFunction',
+                  //     value: 'target => !!target.getProps().getPropValue("pagination")'
+                  //   }
+                  // },
+                  // {
+                  //   name: 'pagination.showTotal',
+                  //   title: {
+                  //     label: '显示总数',
+                  //     tip: 'pagination.showTotal | 用于显示数据总量和当前数据顺序'
+                  //   },
+                  //   propType: 'func',
+                  //   setter: [
+                  //     {
+                  //       componentName: 'FunctionSetter',
+                  //       props: {
+                  //         template:
+                  //           'showTotal(total,range,${extParams}){\n// 用于格式化显示表格数据总量\nreturn `共 ${total} 条`;\n}'
+                  //       }
+                  //     },
+                  //     'VariableSetter'
+                  //   ],
+                  //   condition: {
+                  //     type: 'JSFunction',
+                  //     value: 'target => !!target.getProps().getPropValue("pagination")'
+                  //   }
+                  // },
+                  {
+                    name: 'showSizeChanger',
+                    title: {
+                      label: '页数切换',
+                      tip: 'pagination.showSizeChanger | 是否展示 pageSize 切换器'
+                    },
+                    propType: 'bool',
+                    setter: 'BoolSetter',
+                    defaultValue: false,
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("pagination")'
+                    }
+                  },
+                  {
+                    name: 'showQuickJumper',
+                    title: {
+                      label: '快速跳转',
+                      tip: 'pagination.showQuickJumper | 是否可以快速跳转至某页'
+                    },
+                    propType: 'bool',
+                    setter: 'BoolSetter',
+                    defaultValue: false,
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("pagination")'
+                    }
+                  },
+                  {
+                    name: 'simple',
+                    title: { label: '简单分页', tip: 'pagination.simple | 简单分页' },
+                    propType: 'bool',
+                    setter: 'BoolSetter',
+                    defaultValue: false,
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("pagination")'
+                    }
+                  },
+                  {
+                    name: 'size',
+                    title: { label: '分页尺寸', tip: 'pagination.size | 分页尺寸' },
+                    propType: {
+                      type: 'oneOf',
+                      value: ['default', 'small']
+                    },
+                    setter: [
+                      {
+                        componentName: 'RadioGroupSetter',
+                        props: {
+                          options: [
+                            {
+                              title: '默认',
+                              value: 'default'
+                            },
+                            {
+                              title: '小',
+                              value: 'small'
+                            }
+                          ]
+                        }
+                      },
+                      'VariableSetter'
+                    ],
+                    defaultValue: 'default',
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("pagination")'
+                    }
+                  },
+                  {
+                    name: 'position',
+                    title: { label: '分页位置', tip: 'pagination.position | 分页位置' },
+                    setter: {
+                      componentName: 'ArraySetter',
+                      props: {
+                        itemSetter: {
+                          componentName: 'SelectSetter',
+                          props: {
+                            options: [
+                              {
+                                title: '上左',
+                                value: 'topLeft'
+                              },
+                              {
+                                title: '上中',
+                                value: 'topCenter'
+                              },
+                              {
+                                title: '上右',
+                                value: 'topRight'
+                              },
+                              {
+                                title: '下左',
+                                value: 'bottomLeft'
+                              },
+                              {
+                                title: '下中',
+                                value: 'bottomCenter'
+                              },
+                              {
+                                title: '下右',
+                                value: 'bottomRight'
+                              }
+                            ]
+                          },
+                          initialValue: 'bottomRight'
+                        }
+                      }
+                    },
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("pagination")'
+                    }
+                  }
+                ]
+
               }
-            },
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("pagination")'
             }
-          }
-        ]
+          }]
+
+
       },
       {
         title: '滚动',
@@ -1233,7 +1236,17 @@ const ProTableMeta = {
               tip: 'toolbar.title | 自定义标题',
             },
             propType: 'string',
-            setter: 'StringSetter',
+            setter: [
+              'StringSetter',
+              {
+                componentName: 'SlotSetter',
+                title: '标题插槽',
+                initialValue: {
+                  type: 'JSSlot',
+                  value: []
+                }
+              },
+            ],
             condition: {
               type: 'JSFunction',
               value: 'target => !!target.getProps().getPropValue("toolBarRenderOpen")',
@@ -1246,7 +1259,16 @@ const ProTableMeta = {
               tip: 'toolbar.subTitle | 自定义子标题',
             },
             propType: 'string',
-            setter: 'StringSetter',
+            setter: ['StringSetter',
+              {
+                componentName: 'SlotSetter',
+                title: '子标题插槽',
+                initialValue: {
+                  type: 'JSSlot',
+                  value: []
+                }
+              },
+            ],
             condition: {
               type: 'JSFunction',
               value: 'target => !!target.getProps().getPropValue("toolBarRenderOpen")',
@@ -1348,11 +1370,15 @@ const ProTableMeta = {
         ]
       },
       {
-        title: '搜索设置',
-        display: 'block',
-        type: 'group',
-        items: [
+        name: 'search',
+        title: { label: '查询', tip: '关闭查询,需要手工操作一下' },
+        supportVariable: true,
+        defaultValue: false,
+
+        setter: [
+          "BoolSetter",
           {
+<<<<<<< HEAD:packages/_antd-pro-components/lowcode/pro-table/meta.ts
             name: 'search',
             title: { label: '搜索', tip: 'search | 搜索' },
             propType: 'bool',
@@ -1374,117 +1400,157 @@ const ProTableMeta = {
                 type: 'i18n',
                 'en-US': 'searchText',
                 'zh-CN': 'searchText'
+=======
+            componentName: 'ObjectSetter',
+            props: {
+              config: {
+                items: [
+                  {
+                    title: {
+                      label: {
+                        type: 'i18n',
+                        'en-US': 'searchText',
+                        'zh-CN': '查询文本'
+                      },
+                      tip: 'searchText | 查询按钮的文本'
+                    },
+                    name: 'searchText',
+                    setter: {
+                      componentName: 'StringSetter',
+                      isRequired: false,
+                      initialValue: ''
+                    },
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("search")'
+                    }
+                  },
+                  {
+                    title: {
+                      label: {
+                        type: 'i18n',
+                        'en-US': 'filterType',
+                        'zh-CN': '过滤表单类型	'
+                      },
+                      tip: 'filterType | 过滤表单类型		'
+                    },
+                    name: 'filterType',
+                    setter: {
+                      componentName: 'SelectSetter',
+
+                      props: {
+                        options: [
+                          {
+                            title: 'query模式',
+                            value: 'query',
+                          },
+                          {
+                            title: 'light模式',
+                            value: 'light',
+                          }
+                        ],
+                      },
+                    },
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("search")'
+                    }
+                  },
+                  {
+                    title: {
+                      label: {
+                        type: 'i18n',
+                        'en-US': 'resetText',
+                        'zh-CN': '重置文本'
+                      },
+                      tip: 'resetText | 重置按钮的文本'
+                    },
+                    name: 'resetText',
+                    setter: {
+                      componentName: 'StringSetter',
+                      isRequired: false,
+                      initialValue: ''
+                    },
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("search")'
+                    }
+                  },
+
+                  {
+                    name: 'labelWidth',
+                    title: {
+                      label: '标签宽度',
+                      tip: 'labelWidth | 标签宽度'
+                    },
+                    propType: 'number',
+                    setter: ['StringSetter', 'NumberSetter', 'VariableSetter'],
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("search")'
+                    }
+                  },
+                  {
+                    name: 'span',
+                    title: {
+                      label: '所占列数',
+                      tip: 'span | 所占列数'
+                    },
+                    propType: 'number',
+                    setter: 'NumberSetter',
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("search")'
+                    }
+                  },
+
+                  {
+                    name: 'collapsed',
+                    title: {
+                      label: '是否收起',
+                      tip: 'collapsed | 是否收起'
+                    },
+                    propType: 'bool',
+                    setter: 'BoolSetter',
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("search")'
+                    }
+                  },
+                  {
+                    name: 'defaultCollapsed',
+                    title: {
+                      label: '默认是否收起',
+                      tip: 'defaultCollapsed | 是否收起'
+                    },
+                    propType: 'bool',
+                    setter: 'BoolSetter',
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("search")'
+                    }
+                  },
+                  {
+                    name: 'onCollapse',
+                    title: {
+                      label: '收起按钮的事件',
+                      tip: 'onCollapse | 收起按钮的事件	'
+                    },
+                    propType: 'bool',
+                    setter: 'FunctionSetter',
+                    condition: {
+                      type: 'JSFunction',
+                      value: 'target => !!target.getProps().getPropValue("search")'
+                    }
+                  },
+                ],
+>>>>>>> 20240305:packages/antd-pro/packages/antd-materials/lowcode/pro-table/meta.ts
               },
-              tip: 'searchText | 查询按钮的文本'
             },
-            name: 'search.searchText',
-            setter: {
-              componentName: 'StringSetter',
-              isRequired: false,
-              initialValue: ''
-            },
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("search")'
-            }
-          },
-          {
-            title: {
-              label: {
-                type: 'i18n',
-                'en-US': 'resetText',
-                'zh-CN': 'resetText'
-              },
-              tip: 'resetText | 重置按钮的文本'
-            },
-            name: 'search.resetText',
-            setter: {
-              componentName: 'StringSetter',
-              isRequired: false,
-              initialValue: ''
-            },
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("search")'
-            }
-          },
-          {
-            name: 'search.labelWidth',
-            title: {
-              label: '标签宽度',
-              tip: 'labelWidth | 标签宽度'
-            },
-            propType: 'number',
-            setter: ['StringSetter', 'NumberSetter', 'VariableSetter'],
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("search")'
-            }
-          },
-          {
-            name: 'search.span',
-            title: {
-              label: '所占列数',
-              tip: 'span | 所占列数'
-            },
-            propType: 'number',
-            setter: 'NumberSetter',
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("search")'
-            }
-          },
-          {
-            name: 'search.defaultCollapsed',
-            title: {
-              label: '默认是否收起',
-              tip: 'defaultCollapsed | 默认是否收起'
-            },
-            propType: 'bool',
-            setter: 'BoolSetter',
-            defaultValue: true,
-            condition: {
-              type: 'JSFunction',
-              value: 'target => !!target.getProps().getPropValue("search")'
-            }
           }
-          // {
-          //   name: 'search.collapsed',
-          //   title: {
-          //     label: '是否收起',
-          //     tip: 'collapsed | 是否收起'
-          //   },
-          //   propType: 'bool',
-          //   setter: 'BoolSetter',
-          //   condition: {
-          //     type: 'JSFunction',
-          //     value: 'target => !!target.getProps().getPropValue("search")'
-          //   }
-          // },
-          // // {
-          // //   name: 'search.onCollapse',
-          // //   title: {
-          // //     label: '收起按钮的事件',
-          // //     tip: 'onCollapse | 收起按钮的事件'
-          // //   },
-          // //   propType: 'func',
-          // //   setter: [
-          // //     {
-          // //       componentName: 'FunctionSetter',
-          // //       props: {
-          // //         template:
-          // //           'onCollapse(collapsed,,${extParams}){\n// 设置行属性\nreturn {onClick:event=>{}};\n}'
-          // //       }
-          // //     },
-          // //     'VariableSetter'
-          // //   ],
-          // //   condition: {
-          // //     type: 'JSFunction',
-          // //     value: 'target => !!target.getProps().getPropValue("search")'
-          // //   }
-          // // }
         ]
       },
+
       {
         title: '高级',
         display: 'block',

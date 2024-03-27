@@ -1,51 +1,36 @@
 import React, { Ref } from 'react';
 import { Menu } from 'antd';
-import type { MenuProps } from 'antd';
-import { createFromIconfontCN } from '@ant-design/icons';
-import Icon from '@ant-design/icons/lib/components/Icon';
+// import Icon from '@ant-design/icons/lib/components/Icon';
+import * as icons from '@ant-design/icons';
 
+const CustomNav: any = (props: any, ref: Ref<any>) => {
+  const { icon, type, ...otherProps } = props;
 
-const customNav: any = (props: any, ref: Ref<any>) => {
-  const {items,icon,svg,...otherProps} = props
+  const data = [...otherProps?.items];
 
-  const IconFont = createFromIconfontCN({
-    scriptUrl: icon?.url,
-  });
-
-
-  
-
-
-  function renderMenuItems(data) {
-
-    if (!Array.isArray(data) || data.length === 0) {
-      return null; // 或者返回一个默认的菜单项
-    }
-    
-    return     data?.map(item => {
-      if (item.children) {
-        return (
-          <Menu.SubMenu  key={item.key} title={item.label} icon={svg ?<span  style={icon?.style } dangerouslySetInnerHTML={{ __html: item?.icon }} /> : <IconFont type={item?.icon} style={icon?.style} />}>
-            {renderMenuItems(item.children)}
-          </Menu.SubMenu>
-        );
-      } else {
-        return <Menu.Item key={item.key} icon={svg ?<span  style={icon?.style } dangerouslySetInnerHTML={{ __html: item?.icon }} /> : <IconFont type={item?.icon} style={icon?.style} />}>{item.label}</Menu.Item>;
+  function processMenuItems(menuItems) {
+    return menuItems?.map((item: any) => {
+      const menuItem = { ...item };
+      // 处理当前菜单项
+      if (menuItem?.icon) {
+        const IconComp = ((icons || {}) as any)[menuItem?.icon];
+        if (IconComp) {
+          menuItem.icon = <IconComp {...icon} />;
+        } else {
+          menuItem.icon = '';
+        }
       }
+      // 处理子菜单项
+      if (menuItem?.children) {
+        menuItem.children = processMenuItems(menuItem.children);
+      }
+      return menuItem;
     });
   }
+  const newdata = processMenuItems(data);
+  otherProps.items = newdata;
 
-  return (
-   <Menu
-    {...otherProps}
-    >
-        {renderMenuItems(items||[])}
-      </Menu>
-
-  );
+  return <Menu {...otherProps} />;
 };
 
-  
-
-  export default customNav;
-
+export default CustomNav;

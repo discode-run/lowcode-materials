@@ -112,7 +112,7 @@ const WatermarkMeta: IPublicTypeComponentMetadata = {
             "setters": [
               {
                 "componentName": "StringSetter",
-                "initialValue": "appthen"
+                "initialValue": "Appthen"
               },
               {
                 "componentName": "ArraySetter",
@@ -121,7 +121,7 @@ const WatermarkMeta: IPublicTypeComponentMetadata = {
                     "componentName": "StringSetter",
                   }
                 },
-                "initialValue": [ "appthen"]
+                "initialValue": [ "Appthen"]
               }
             ]
           }
@@ -205,11 +205,11 @@ const WatermarkMeta: IPublicTypeComponentMetadata = {
 const snippets: IPublicTypeSnippet[] = [
   {
     "title": "水印",
-    "screenshot": "https://cdn.itq168.com/img/disscode-shuiyin.svg",
+    "screenshot": "https://cdn.disscode.com/assets/Appthen-shuiyin.svg",
     "schema": {
       "componentName": "Watermark",
       "props": {
-        "content":'Appthen Studio'
+        "content":'Appthen前端低代码'
       }
     }
   }

@@ -10,7 +10,11 @@ const ProContainerMeta: ComponentMetadata = {
   group: '高级组件',
   category: '布局类',
   npm: {
+<<<<<<< HEAD:packages/_antd-pro-components/lowcode/pro-container/meta.ts
     package: '@seada/antd-materials',
+=======
+    package: '@appthen/antd-pro',
+>>>>>>> 20240305:packages/antd-pro/packages/antd-materials/lowcode/pro-container/meta.ts
     version: 'latest',
     exportName: 'ProContainer',
     main: '',
