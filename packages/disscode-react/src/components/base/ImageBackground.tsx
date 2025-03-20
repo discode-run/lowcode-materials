@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { IStyleItem } from './Text.PropType';
 import View from './View';
 
@@ -17,7 +17,7 @@ interface IProp {
   key?: string | number;
   onLoad?: () => void;
 }
-export class ImageBackground extends Component<IProp> {
+export class ImageBackground extends PureComponent<IProp> {
   render() {
     const { src, children, className, style = {}, inlineStyle, ...other } = this.props;
     let _className = className;

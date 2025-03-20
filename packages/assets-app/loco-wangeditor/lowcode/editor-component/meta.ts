@@ -284,7 +284,7 @@ const editorComponentMeta: IPublicTypeComponentMetadata = {
                                 },
                               },
                               {
-                                title: '拼接url',
+                                title: '传递头信息',
                                 name: 'uploadImage.headers',
                                 supportVariable: true,
                     

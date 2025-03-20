@@ -97,7 +97,7 @@ const SwiperMeta: IPublicTypeComponentMetadata = {
         },
         name: 'previousMargin',
         setter: {
-          componentName: 'PxNumberSetter',
+          componentName: 'NumberSetter',
           props: {
             min: 0,
           },
@@ -110,7 +110,7 @@ const SwiperMeta: IPublicTypeComponentMetadata = {
         },
         name: 'nextMargin',
         setter: {
-          componentName: 'PxNumberSetter',
+          componentName: 'NumberSetter',
           props: {
             min: 0,
           },

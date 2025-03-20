@@ -9,7 +9,7 @@ import Taro from '@tarojs/taro';
 
 let globalViewId = 0;
 
-export class View extends React.Component<IViewProp & AnimateProp> {
+export class View extends React.PureComponent<IViewProp & AnimateProp> {
   static displayName = 'View';
 
   constructor(props: IViewProp) {
@@ -135,7 +135,7 @@ export class View extends React.Component<IViewProp & AnimateProp> {
         {safeBottom && <SafeView forceInset={{ top: 'never', bottom: 'always' }} />}
       </AnimateView>
     ) : (
-      <TView onClick={onClick} className={className} style={_style} {...omit(other, [])}>
+      <TView onClick={onClick} className={className} style={_style} {...omit(other as any, ['__events'])}>
         {safeTop && <SafeView forceInset={{ top: 'always', bottom: 'never' }} />}
         {children}
         {safeBottom && <SafeView forceInset={{ top: 'never', bottom: 'always' }} />}

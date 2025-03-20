@@ -6,7 +6,7 @@ import { IViewProp } from './View.PropType';
 import SafeView from './Bar/SafeView';
 import AnimateView, { AnimateProp } from '../animate';
 
-export class View extends React.Component<IViewProp & AnimateProp> {
+export class View extends React.PureComponent<IViewProp & AnimateProp> {
   static displayName = 'View';
 
   render() {

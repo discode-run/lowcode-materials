@@ -5,6 +5,7 @@ import {
   ActionType,
   ProColumnType
 } from '@ant-design/pro-components'
+import { ProConfigProvider } from '@ant-design/pro-provider'
 import type { ProFormInstance } from '@ant-design/pro-components'
 import type { TablePaginationConfig } from 'antd'
 import { Tag, ConfigProvider } from 'antd'
@@ -12,11 +13,7 @@ import zhCNIntl from 'antd/es/locale/zh_CN'
 import enUSIntl from 'antd/es/locale/en_US'
 import { defineGetterProperties, isPlainObj } from '../../shared/index'
 import { FormProps } from 'rc-field-form/lib/Form'
-import {
-  ProCard,
-  ProFormField,
-  ProFormRadio,
-} from '@ant-design/pro-components';
+
 interface IValueEnum {
   text: string
   value: string
@@ -24,14 +21,16 @@ interface IValueEnum {
 }
 
 type IExtendsColType = ProColumnType & {
-  valueEnum?: IValueEnum[]
+  valueEnum?: Record<string, IValueEnum>
   renderTag?: boolean
 }
 
 export type EditableProTableProps = React.ComponentProps<typeof OriginalProTable> & {
-  columns?: IExtendsColType
+  columns?: IExtendsColType[]
   intl?: string
   onValuesChange?: FormProps['onValuesChange']
+  toolBarRenderOpen?: boolean
+  recordCreatorProps?: any
 }
 
 const intlMap = {
@@ -40,21 +39,19 @@ const intlMap = {
 }
 
 class EditableProTable extends Component<EditableProTableProps, any> {
-  // pro-table 未对批量操作进行封装，自己封了
   state = {
     selectedRowKeys: (this.props.rowSelection as any)?.selectedRowKeys ?? [],
     selectedRows: [],
     collapsed:
       this.props.search === false
         ? undefined
-        : this.props.search?.defaultCollapsed // 之前设置的this.props.search.collapsed会失效，但问题不大
+        : this.props.search?.defaultCollapsed
   }
 
   actionRef = createRef<ActionType>()
-
   formRef = createRef<ProFormInstance>()
 
-  onSelectRowsChange = (selectedRowKeys, selectedRows) => {
+  onSelectRowsChange = (selectedRowKeys: any[], selectedRows: any[]) => {
     this.setState({
       selectedRowKeys,
       selectedRows
@@ -69,7 +66,7 @@ class EditableProTable extends Component<EditableProTableProps, any> {
     return this.state.selectedRows
   }
 
-  setSelectedRowKeys(selectedRowKeys) {
+  setSelectedRowKeys(selectedRowKeys: any[]) {
     this.setState({
       selectedRowKeys: Array.isArray(selectedRowKeys)
         ? selectedRowKeys
@@ -78,50 +75,40 @@ class EditableProTable extends Component<EditableProTableProps, any> {
   }
 
   componentDidMount() {
-    // 把操作方法挂载到 class instance 上，可通过 this.$ 调用
     defineGetterProperties(this, [this.actionRef, this.formRef])
   }
 
   render() {
-
-
-
-
-    const { columns, rowSelection, intl, onValuesChange, toolBarRender, toolBarRenderOpen,recordCreatorProps } = this.props
-
+    const { columns = [], rowSelection, intl, onValuesChange, toolBarRender, toolBarRenderOpen, recordCreatorProps = {} } = this.props
     const { selectedRowKeys, collapsed } = this.state
 
-
-    if (this.props?.rowKey && recordCreatorProps.record){
-      recordCreatorProps.record[this.props?.rowKey] = (Math.random() * 10000000).toFixed(0)
+    if (this.props?.rowKey && recordCreatorProps.record) {
+      recordCreatorProps.record[this.props.rowKey] = (Math.random() * 10000000).toFixed(0)
     }
 
-    console.log("recordCreatorProps",recordCreatorProps)
-
-    // 劫持渲染标签类型的列
-    columns?.map((item) => {
-      if (isPlainObj(item.valueEnum) && (item as any).renderTag === true) {
-        item.render = (_, record) => {
-          const colValue = record[item.dataIndex as string]
-
-          const target = item.valueEnum[colValue]
-
-          return target?.text ? (
-            <Tag color={target?.status?.toLowerCase()}>{target?.text}</Tag>
-          ) : (
-            '-'
-          )
+    // 处理标签渲染
+    const processedColumns = columns.map((item) => {
+      if (isPlainObj(item.valueEnum) && item.renderTag === true) {
+        return {
+          ...item,
+          render: (_: any, record: any) => {
+            const colValue = record[item.dataIndex as string]
+            const target = item.valueEnum?.[colValue]
+            return target?.text ? (
+              <Tag color={target.status?.toLowerCase()}>{target.text}</Tag>
+            ) : (
+              '-'
+            )
+          }
         }
       }
+      return item
     })
 
     const pagination = this.props.pagination as TablePaginationConfig
-
-    // current 让用户自己配置的话，用户需要自己监听 onChange 事件去修改，对低代码平台不友好
     if (typeof pagination?.current === 'number') {
       delete pagination.current
     }
-
     if (typeof pagination?.total === 'number') {
       delete pagination.total
     }
@@ -129,79 +116,39 @@ class EditableProTable extends Component<EditableProTableProps, any> {
     const toolBarRenderFunc = () => {
       if (toolBarRenderOpen) {
         if (toolBarRender === false) {
-          return null;
-        } else {
-          return toolBarRender;
+          return null
         }
-      } else {
-        return false;
+        return toolBarRender
       }
-    };
-    let data = this.props.dataSource
-    if(!Array.isArray(this.props.dataSource)){
-      data = []
+      return false
     }
+
+    const data = Array.isArray(this.props.dataSource) ? this.props.dataSource : []
+
     return (
-      <ConfigProvider locale={intlMap[intl || 'zhCNIntl']}>
-        <OriginalProTable
-          {...this.props}
-          dataSource={data}
-          // value={dataSource}
-          // editable={{
-          //   type: 'multiple',
-
-          // }}
-          recordCreatorProps = {recordCreatorProps}
-
-          // recordCreatorProps={{
-          //   // newRecordType: 'dataSource',
-          //   record: () => ({
-          //     id: Date.now(),
-          //   }),
-          // }}
-          // search={
-          //   typeof this.props.search === 'boolean'
-          //     ? this.props.search
-          //     : {
-          //         ...this.props.search,
-          //         collapsed,
-          //         onCollapse: () => {
-          //           if (this.props.search === false) return
-          //           this.setState({
-          //             collapsed: !collapsed
-          //           })
-          //           if (this.props.search.onCollapse) {
-          //             // 如果设置了函数则继续执行
-          //             this.props.search.onCollapse(!collapsed)
-          //           }
-          //         }
-          //       }
-          // }
-          rowSelection={
-            rowSelection
-              ? {
-                  ...rowSelection,
-                  defaultSelectedRowKeys: selectedRowKeys,
-                  selectedRowKeys,
-                  onChange: (...args) => {
-                    rowSelection?.onChange?.(...args)
-                    this.onSelectRowsChange(...args)
+          <OriginalProTable
+            {...this.props}
+            dataSource={data}
+            recordCreatorProps={recordCreatorProps}
+            rowSelection={
+              rowSelection
+                ? {
+                    ...rowSelection,
+                    defaultSelectedRowKeys: selectedRowKeys,
+                    selectedRowKeys,
+                    onChange: (keys: any[], rows: any[], info: any) => {
+                      rowSelection?.onChange?.(keys, rows, info)
+                      this.onSelectRowsChange(keys, rows)
+                    }
                   }
-                }
-              : false
-          }
-          value={this.props?.dataSource}
-     
-          columns={columns}
-          // actionRef={this.actionRef}
-          // formRef={this.formRef}
-          editableFormRef={this.formRef}
-          form={{ onValuesChange: onValuesChange }}
-          toolBarRender={toolBarRenderFunc()}
-        />
-
-        
-      </ConfigProvider>
+                : false
+            }
+            value={this.props?.dataSource}
+            columns={processedColumns}
+            editableFormRef={this.formRef}
+            form={{ onValuesChange }}
+            toolBarRender={toolBarRenderFunc()}
+          />
     )
   }
 }

@@ -4,6 +4,12 @@ module.exports = ({ onGetWebpackConfig }) => {
     config.module
       .rule('less')
       .test(/\.less/)
+      .use('style-loader')
+      .loader('style-loader')
+      .end()
+      .use('css-loader')
+      .loader('css-loader')
+      .end()
       .use('less-loader')
       .loader('less-loader')
       .options({
@@ -15,5 +21,41 @@ module.exports = ({ onGetWebpackConfig }) => {
           }
         }
       })
+
+    config.module
+      .rule('sass')
+      .test(/\.s[ac]ss$/)
+      .use('style-loader')
+      .loader('style-loader')
+      .end()
+      .use('css-loader')
+      .loader('css-loader')
+      .end()
+      .use('sass-loader')
+      .loader('sass-loader')
+      .options({
+        implementation: require('sass')
+      })
+
+    config.module
+      .rule('css')
+      .test(/\.css$/)
+      .use('style-loader')
+      .loader('style-loader')
+      .end()
+      .use('css-loader')
+      .loader('css-loader')
+
+    config.resolve.extensions
+      .add('.js')
+      .add('.jsx')
+      .add('.ts')
+      .add('.tsx')
+      .add('.json')
+      .add('.mjs')
+
+    config.resolve.mainFields
+      .add('module')
+      .add('main')
   })
 }

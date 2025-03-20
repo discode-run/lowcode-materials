@@ -1,4 +1,4 @@
-import React, { Component, Children, ReactElement } from 'react';
+import React, { Component, Children, ReactElement, PureComponent } from 'react';
 import classNames from 'classnames';
 import './index.scss';
 
@@ -10,7 +10,7 @@ interface ISortableProps {
   children: ReactElement[];
 }
 
-class Sortable extends Component<ISortableProps> {
+class Sortable extends PureComponent<ISortableProps> {
   private shell?: HTMLDivElement | null;
 
   private items?: Array<string | number>;

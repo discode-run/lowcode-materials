@@ -1,6 +1,6 @@
 {
   "name": "cross-ui",
-  "version": "4.1.0",
+  "version": "4.1.11",
   "description": "UI KIT for Taro",
   "module": "dist/index.esm.js",
   "main": "dist/index.js",
@@ -40,6 +40,7 @@
     "build:rollup": "yarn run beforeBuildRollup && rollup --config ./config/rollup.config.js && yarn run afterBuildRollup",
     "beforeBuildRollup": "node ./scripts/beforeBuildRollup.js",
     "afterBuildRollup": "node ./scripts/afterBuildRollup.js",
+    "pub": "npm publish --access public --registry https://registry.npmjs.org && cnpm sync cross-ui",
     "lint": "eslint ./src --fix",
     "lint:style": "stylelint \"src/**/*.scss\" --syntax scss",
     "lint:style-fix": "stylelint \"src/**/*.scss\" --syntax scss --fix",
@@ -118,7 +119,7 @@
   },
   "componentConfig": {
     "isComponentLibrary": true,
-    "materialSchema": "https://unpkg.com/cross-ui@4.0.47/build/lowcode/assets-prod.json"
+    "materialSchema": "https://unpkg.com/cross-ui@4.1.10/build/lowcode/assets-prod.json"
   },
   "gitHead": "536691349f62f978d99a1318690690246cc584fa",
   "exports": {

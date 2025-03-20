@@ -5,7 +5,7 @@ import { Image } from '@tarojs/components';
 
 const defaultImage = 'https://cdn.appthen.com/default_img.png?v=2';
 
-class TImage extends React.Component<IImageProps> {
+class TImage extends React.PureComponent<IImageProps> {
   static displayName = 'Image';
 
   render() {

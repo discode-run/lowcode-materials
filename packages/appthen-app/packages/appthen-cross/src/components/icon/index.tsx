@@ -10,7 +10,7 @@ export default class AtIcon extends React.Component<AtIconProps> {
   public static defaultProps: AtIconProps;
   public static propTypes: InferProps<AtIconProps>;
 
-  public render(): JSX.Element {
+  render(): JSX.Element {
     const { className, prefixClass, value, size, color, svg, style } = this.props;
 
     const _size = `${pxTransform(parseInt(String(size)) * 2)}`;
@@ -24,10 +24,11 @@ export default class AtIcon extends React.Component<AtIconProps> {
     return svg ? (
       !svg.includes('data:') ? (
         <div
+          className={classNames(prefixClass, className)}
           style={{
             width: _size,
             height: _size,
-            color: color,
+            color,
             ...style,
           }}
           dangerouslySetInnerHTML={{
@@ -36,12 +37,13 @@ export default class AtIcon extends React.Component<AtIconProps> {
         />
       ) : (
         <Image
+          className={classNames(prefixClass, className)}
           svg
           src={svg}
           style={{
             width: _size,
             height: _size,
-            color: color,
+            color,
             ...style,
           }}
         />
@@ -50,7 +52,7 @@ export default class AtIcon extends React.Component<AtIconProps> {
       <Text
         className={classNames(prefixClass, iconName, className)}
         style={mergeStyle(rootStyle, (style as object) || {})}
-      ></Text>
+      />
     );
   }
 }
@@ -64,12 +66,12 @@ AtIcon.defaultProps = {
   size: 24,
 };
 
-AtIcon.propTypes = {
-  customStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  className: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  prefixClass: PropTypes.string,
-  value: PropTypes.string,
-  color: PropTypes.string,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onClick: PropTypes.func,
-};
+// AtIcon.propTypes = {
+//   customStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+//   className: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+//   prefixClass: PropTypes.string,
+//   value: PropTypes.string,
+//   color: PropTypes.string,
+//   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+//   onClick: PropTypes.func,
+// };

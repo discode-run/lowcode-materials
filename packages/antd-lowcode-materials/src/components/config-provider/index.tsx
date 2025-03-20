@@ -23,17 +23,18 @@ const ConfigProvider = (props: any) => {
       localeData = undefined;
     }
   }
-
   return (
     <OriginalConfigProvider
       locale={localeData}
       theme={{
         ...theme,
         algorithm:
-          theme.algorithm === 'dark' ? AntdTheme.darkAlgorithm : AntdTheme.compactAlgorithm,
+          theme.algorithm === 'dark' ? AntdTheme?.darkAlgorithm : AntdTheme?.compactAlgorithm,
       }}
       {...rest}
-    />
+    >
+      {props.children}
+    </OriginalConfigProvider>
   );
 };
 

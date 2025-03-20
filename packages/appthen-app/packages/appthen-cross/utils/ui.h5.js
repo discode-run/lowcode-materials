@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro';
-export { addPortal, registerPartalComponent, showComponentModal, renderComponentPortal, renderComponent } from '../';
+export { addPortal, registerPartalComponent, showComponentModal, renderComponentPortal, renderComponent } from '..';
 export const px = function (num) {
     if (window.__client == 'web')
         return (num / 2) + 'px';

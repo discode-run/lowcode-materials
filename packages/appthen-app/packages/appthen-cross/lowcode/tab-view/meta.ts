@@ -24,6 +24,17 @@ const TabViewMeta: IPublicTypeComponentMetadata = {
         title: {
           label: {
             type: 'i18n',
+            'en-US': 'current',
+            'zh-CN': '当前页签',
+          },
+        },
+        name: 'current',
+        setter: 'StringSetter',
+      },
+      {
+        title: {
+          label: {
+            type: 'i18n',
             'en-US': 'color',
             'zh-CN': '文字颜色',
           },
@@ -32,6 +43,29 @@ const TabViewMeta: IPublicTypeComponentMetadata = {
         setter: {
           componentName: 'ColorSetter',
           initialValue: '#666',
+        },
+        extraProps: {
+          setValue(target, value) {
+            const { node } = target;
+            const list = node?.getPropValue('list')?.map((_) => {
+              // @ts-ignore
+              if (window.__transformSvg) {
+                if (_.iconPath) {
+                  // @ts-ignore
+                  _.iconPath = window.__transformSvg(_.iconPath, value);
+                }
+              }
+              return _;
+            });
+            node?.setPropValue('color', value);
+            node?.setPropValue('list', list);
+            // if (Array.isArray(gutter)) {
+            //   gutter[0] = value;
+            //   node.setPropValue('gutter', gutter);
+            // } else {
+            //   node.setPropValue('gutter', [value, 0]);
+            // }
+          },
         },
       },
       {
@@ -46,6 +80,23 @@ const TabViewMeta: IPublicTypeComponentMetadata = {
         setter: {
           componentName: 'ColorSetter',
           initialValue: '#3e5bec',
+        },
+        extraProps: {
+          setValue(target, value) {
+            const { node } = target;
+            const list = node?.getPropValue('list')?.map((_) => {
+              // @ts-ignore
+              if (window.__transformSvg) {
+                if (_.selectedIconPath) {
+                  // @ts-ignore
+                  _.selectedIconPath = window.__transformSvg(_.selectedIconPath, value);
+                }
+              }
+              return _;
+            });
+            node?.setPropValue('selectedColor', value);
+            node?.setPropValue('list', list);
+          },
         },
       },
       {
@@ -85,7 +136,7 @@ const TabViewMeta: IPublicTypeComponentMetadata = {
                       },
                     ],
                   },
-                }
+                };
               },
               props: {
                 config: {
@@ -129,7 +180,17 @@ const TabViewMeta: IPublicTypeComponentMetadata = {
                       },
                       name: 'iconPath',
                       setter: {
-                        componentName: 'ImageSetter',
+                        componentName: 'MixedSetter',
+                        props: {
+                          setters: [
+                            {
+                              componentName: 'SvgSetter',
+                            },
+                            {
+                              componentName: 'ImageSetter',
+                            },
+                          ],
+                        },
                       },
                     },
                     {
@@ -142,7 +203,17 @@ const TabViewMeta: IPublicTypeComponentMetadata = {
                       },
                       name: 'selectedIconPath',
                       setter: {
-                        componentName: 'ImageSetter',
+                        componentName: 'MixedSetter',
+                        props: {
+                          setters: [
+                            {
+                              componentName: 'SvgSetter',
+                            },
+                            {
+                              componentName: 'ImageSetter',
+                            },
+                          ],
+                        },
                       },
                     },
                     {
@@ -293,6 +364,30 @@ const TabViewMeta: IPublicTypeComponentMetadata = {
           },
           initialValue: [],
         },
+        extraProps: {
+          setValue(target, value) {
+            const { node } = target;
+            const color = node?.getPropValue('color');
+            const selectedColor = node?.getPropValue('selectedColor');
+            // console.log('setValue list: ', JSON.parse(JSON.stringify(value)))
+            const list = value?.map((_) => {
+              // @ts-ignore
+              if (window.__transformSvg) {
+                if (color && _.iconPath) {
+                  // @ts-ignore
+                  _.iconPath = window.__transformSvg(_.iconPath, color);
+                }
+                if (selectedColor && _.selectedIconPath) {
+                  // @ts-ignore
+                  _.selectedIconPath = window.__transformSvg(_.selectedIconPath, selectedColor);
+                }
+              }
+              return _;
+            });
+            // console.log('setValueed list: ', JSON.parse(JSON.stringify(list)))
+            node?.setPropValue('list', list);
+          },
+        },
       },
       {
         name: 'tabbarStyle',
@@ -326,7 +421,8 @@ const TabViewMeta: IPublicTypeComponentMetadata = {
           name: 'onChange',
           description: '标签页切换',
           // @ts-ignore
-          template: "onTabChange(index, name, ${extParams}) {\n  console.log('onTabChange: ', index, name);\n}",
+          template:
+            "onTabChange(index, name, ${extParams}) {\n  console.log('onTabChange: ', index, name);\n}",
         },
       ],
     },

@@ -1,5 +1,3 @@
-import { FootbarItem } from '@/components/Bar/FooterBar/FooterBar';
-
 export interface ITabViewProps {
   /**
    * 文字颜色

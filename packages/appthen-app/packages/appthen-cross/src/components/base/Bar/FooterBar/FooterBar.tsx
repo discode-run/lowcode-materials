@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { Image, Text, View, SafeView } from '../../../..';
+import { Image, Text, View, SafeView, AtIcon } from '../../../..';
 
 import { px } from '../../../../utils';
 
@@ -84,22 +84,40 @@ const FooterBar = observer(
                       paddingBottom: item.spacing ? px((item?.spacing || 0) * 2) : undefined,
                     }}
                   >
-                    <Image
-                      className={`cs-footer__icon ${isSelect ? '' : 'M-display-none'}`}
-                      src={item.selectedIconPath || defaultIcon}
-                      style={{
-                        width: px((item?.width || 0) * 2),
-                        height: px((item?.height || 0) * 2),
-                      }}
-                    />
-                    <Image
-                      className={`cs-footer__icon ${!isSelect ? '' : 'M-display-none'}`}
-                      src={item.iconPath || defaultIcon}
-                      style={{
-                        width: px((item?.width || 0) * 2),
-                        height: px((item?.height || 0) * 2),
-                      }}
-                    />
+                    {item.selectedIconPath?.includes('<svg') ? (
+                      <AtIcon
+                        className={`cs-footer__icon ${isSelect ? '' : 'M-display-none'}`}
+                        svg={item.selectedIconPath}
+                        color={selectedColor}
+                        size={item?.width}
+                      />
+                    ) : (
+                      <Image
+                        className={`cs-footer__icon ${isSelect ? '' : 'M-display-none'}`}
+                        src={item.selectedIconPath || defaultIcon}
+                        style={{
+                          width: px((item?.width || 0) * 2),
+                          height: px((item?.height || 0) * 2),
+                        }}
+                      />
+                    )}
+                    {item.iconPath?.includes('<svg') ? (
+                      <AtIcon
+                        className={`cs-footer__icon ${!isSelect ? '' : 'M-display-none'}`}
+                        svg={item.iconPath}
+                        color={color}
+                        size={item?.width}
+                      />
+                    ) : (
+                      <Image
+                        className={`cs-footer__icon ${!isSelect ? '' : 'M-display-none'}`}
+                        src={item.iconPath || defaultIcon}
+                        style={{
+                          width: px((item?.width || 0) * 2),
+                          height: px((item?.height || 0) * 2),
+                        }}
+                      />
+                    )}
 
                     {/* Badge */}
                     {!!item.badge && (
@@ -128,7 +146,7 @@ const FooterBar = observer(
         </View>
         <SafeView
           forceInset={{ top: 'never', bottom: 'always' }}
-          style={{ backgroundColor: '#fff' }}
+          style={{ backgroundColor: style?.backgroundColor }}
         />
       </View>
     );

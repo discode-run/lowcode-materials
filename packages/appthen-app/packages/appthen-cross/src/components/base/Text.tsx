@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { ITextProps } from './Text.PropType';
 import { Text as TText } from '@tarojs/components';
 
-export class Text extends React.Component<ITextProps> {
+export class Text extends React.PureComponent<ITextProps> {
   static displayName = 'Text';
 
   handleInput = (e: any) => {

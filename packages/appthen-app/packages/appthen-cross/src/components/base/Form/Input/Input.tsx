@@ -9,7 +9,7 @@ import { ICsInputProps } from './PropType';
 import classNames from 'classnames';
 
 @observer
-class TextInput extends React.Component<ICsInputProps> {
+class TextInput extends React.PureComponent<ICsInputProps> {
   @observable value = '';
 
   @action handleInputChange = (e: any) => {
@@ -33,7 +33,8 @@ class TextInput extends React.Component<ICsInputProps> {
         placeholderStyle={placeholderStyle || 'color:#999'}
         password={password}
         style={inputStyle}
-        {...omit(this.props, ['className', 'inputStyle', 'hideClear', 'onChange'])}
+        // @ts-ignore
+        {...omit(this.props, ['className', 'inputStyle', 'hideClear', 'onChange', '__events'])}
       />
     );
   }

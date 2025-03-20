@@ -1,8 +1,10 @@
-import { ProLayout, SettingDrawer } from '@ant-design/pro-components'
+import {
+  ProLayout,
+  SettingDrawer,
+  ProSettings
+} from '@ant-design/pro-components'
 import { ProConfigProvider } from '@ant-design/pro-provider'
 import React, { useState } from 'react'
-
-import { ProSettings } from '@ant-design/pro-components'
 
 export default props => {
   const [pathname, setPathname] = useState(props?.location?.pathname)
@@ -18,21 +20,21 @@ export default props => {
     <ProConfigProvider dark={props?.dark}>
       <ProLayout
         prefixCls="my-prefix"
-        {...props}
-        {...settings}
         splitMenus
-        location={{
-          pathname
-        }}
         menuItemRender={(item, dom) => (
-          <a
+          <div
             onClick={() => {
-              setPathname(item.path || '/welcome')
+              setPathname(item.path || '/')
             }}
           >
             {dom}
-          </a>
+          </div>
         )}
+        {...props}
+        {...settings}
+        location={{
+          pathname
+        }}
       >
         {content()}
         {!props?.devops ? null : (
@@ -41,6 +43,9 @@ export default props => {
             settings={settings}
             onSettingChange={changeSetting => {
               setSetting(changeSetting)
+              props.onSettingChange({
+                settingsdata: changeSetting
+              })
             }}
             // disableUrlParams={false}
           />

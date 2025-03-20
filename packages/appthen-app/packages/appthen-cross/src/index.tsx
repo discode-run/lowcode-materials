@@ -1,6 +1,5 @@
 import {
   Picker as TPicker,
-  Swiper as TSwiper,
   SwiperItem as TSwiperItem,
   PickerView as TPickerView,
   PickerViewColumn as IPickerViewColumn,
@@ -80,6 +79,7 @@ export { default as Page } from './components/base/Layout/Page';
 export { default as SafeView } from './components/base/Bar/SafeView';
 export { default as Modal } from './components/base/Modal';
 export { default as AutoList } from './components/base/List/AutoList';
+export { default as Swiper } from './components/base/Swiper';
 
 export { default as Component } from './components/base/Layout/Component';
 export const PickerView = TPickerView;
@@ -91,7 +91,6 @@ export { default as FooterBar } from './components/base/Bar/FooterBar';
 export { default as HeaderBar } from './components/base/Bar/HeaderBar';
 export { default as TabView } from './components/base/Layout/Tabview';
 export const Picker = TPicker;
-export const Swiper = TSwiper;
 export const SwiperItem = TSwiperItem;
 export const Switch = TSwitch;
 export const Video = TVideo;

@@ -63,7 +63,7 @@ export interface ScrollViewProps {
 }
 
 @observer
-export class HocScrollView extends React.Component<ScrollViewProps> {
+export class HocScrollView extends React.PureComponent<ScrollViewProps> {
   /**
    * 用于 scrollTo*
    * bug 由于pc端使用 出现只要使用ueditor 输入，scrollView 就会滚动到 目前 scrollTop 的位置 所以默认值为 undefined

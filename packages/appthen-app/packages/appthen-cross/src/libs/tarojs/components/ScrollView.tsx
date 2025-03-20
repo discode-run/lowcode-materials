@@ -37,7 +37,7 @@ function throttle(fn, delay) {
     }, delay);
   };
 }
-class ScrollView extends React.Component<ScrollViewProps> {
+class ScrollView extends React.PureComponent<ScrollViewProps> {
   constructor() {
     super(...arguments);
   }
@@ -152,7 +152,6 @@ class ScrollView extends React.Component<ScrollViewProps> {
       uperAndLowerThrottle();
       onScroll && onScroll(e);
     };
-
     return (
       <div
         ref={(container) => {

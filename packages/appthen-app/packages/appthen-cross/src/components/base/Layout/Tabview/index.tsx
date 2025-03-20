@@ -8,6 +8,29 @@ class TabView extends React.Component<ITabViewProps> {
   state = {
     current: 0,
   };
+
+  componentDidMount() {
+    const { current } = this.props;
+    if (current) {
+      this.setState({
+        current: typeof current === 'string' ? current : Number(current),
+      });
+    }
+  }
+
+  componentDidUpdate(
+    prevProps: Readonly<ITabViewProps>,
+    prevState: Readonly<{}>,
+    snapshot?: any,
+  ): void {
+    const { current } = this.props;
+    if (prevProps.current !== current) {
+      this.setState({
+        current: typeof current === 'string' ? current : (current ? (Number(current)) : undefined),
+      });
+    }
+  }
+
   onTabChange = (index: number, name?: string) => {
     const { onChange } = this.props;
     this.setState({
@@ -21,10 +44,11 @@ class TabView extends React.Component<ITabViewProps> {
     const { current } = this.state;
     const { color, selectedColor, style, tabbarStyle, list } = this.props;
     return (
-      <View className='M-flex-item M-flexbox-vertical'>
-        <View className='M-flex-item M-flexbox-vertical' style={style}>
+      <View className="M-flex-item M-flexbox-vertical">
+        <View className="M-flex-item M-flexbox-vertical" style={style}>
           {list?.map((item, index) => {
-            const isSelect = typeof current === 'string' ? current === item.name : current === index;
+            const isSelect =
+              typeof current === 'string' ? current === item.name : current === index;
             return (
               <View
                 className={cls('M-flexbox-vertical', 'M-flex-item', {
@@ -37,7 +61,14 @@ class TabView extends React.Component<ITabViewProps> {
             );
           })}
         </View>
-        <FooterBar color={color} selectedColor={selectedColor} style={tabbarStyle} list={list} current={current} onChange={onTabChange} />
+        <FooterBar
+          color={color}
+          selectedColor={selectedColor}
+          style={tabbarStyle}
+          list={list}
+          current={current}
+          onChange={onTabChange}
+        />
       </View>
     );
   }
